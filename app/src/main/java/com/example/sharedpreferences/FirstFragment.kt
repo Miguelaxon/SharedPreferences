@@ -32,31 +32,58 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.buttonGuardar.setOnClickListener {
             save()
         }
 
+        binding.buttonBorrar.setOnClickListener {
+            clear()
+        }
     }
 
     fun save(){
-        //binding.editNumber.setText(mSharedPreferences.getInt("numero_entero", 0).toString())
-        var numEntero: Int = binding.editNumber.text.toString().toInt()
-        mSharedPreferences.edit().putInt("numero_entero", numEntero).apply()
-        var numEntero2 = mSharedPreferences.getInt("numero_entero", -1).toString()
-        binding.textViewNumber.setText(getString(R.string.valorEntero, numEntero2.toInt()))
+        if (binding.editNumber.text.length == 0){
+            Toast.makeText(activity, "Debe ingresar un número entero", Toast.LENGTH_LONG).show()
+        } else {
+            var numEntero: Int = binding.editNumber.text.toString().toInt()
+            mSharedPreferences.edit().putInt("numeroEntero", numEntero).apply()
+            var numEntero2 = mSharedPreferences.getInt("numeroEntero", -1).toString()
+            binding.textViewNumber.setText(getString(R.string.valorEntero, numEntero2.toInt()))
+        }
 
-        //binding.editText.setText(mSharedPreferences.getString("texto", " "))
-        var texto: String = binding.editText.text.toString()
-        mSharedPreferences.edit().putString("texto", texto).apply()
-        var texto2 = mSharedPreferences.getString("texto", " ").toString()
-        binding.textViewText.setText(getString(R.string.texto_almacenado, texto2))
+        if (binding.editText.text.length == 0){
+            Toast.makeText(activity, "Debe ingresar un texto", Toast.LENGTH_LONG).show()
+        } else {
+            var texto: String = binding.editText.text.toString()
+            mSharedPreferences.edit().putString("texto", texto).apply()
+            var texto2 = mSharedPreferences.getString("texto", " ").toString()
+            binding.textViewText.setText(getString(R.string.texto_almacenado, texto2))
+        }
 
-        //binding.editNumberDecimal.setText(mSharedPreferences.getFloat("numero_decimal", -1f).toString())
-        var numDecimal: Float = binding.editNumberDecimal.text.toString().toFloat()
-        mSharedPreferences.edit().putFloat("numero_decimal", numDecimal).apply()
-        var numDecimal2 = mSharedPreferences.getFloat("numero_decimal", -1f).toString()
-        binding.textViewNumberDecimal.setText(getString(R.string.valorDecimal, numDecimal2.toFloat()))
-        Toast.makeText(activity, "$numDecimal2", Toast.LENGTH_LONG).show()
+        if (binding.editNumberDecimal.text.length == 0){
+            Toast.makeText(activity, "Debe ingresar un número decimal", Toast.LENGTH_LONG).show()
+        } else {
+            var numDecimal: Float = binding.editNumberDecimal.text.toString().toFloat()
+            mSharedPreferences.edit().putFloat("numeroDecimal", numDecimal).apply()
+            var numDecimal2 = mSharedPreferences.getFloat("numeroDecimal", 1.0f).toString()
+            binding.textViewNumberDecimal.setText(getString(R.string.valorDecimal, numDecimal2))
+        }
+    }
+
+    fun clear(){
+        mSharedPreferences.edit().remove("numeroEntero").apply()
+        mSharedPreferences.edit().remove("texto").apply()
+        mSharedPreferences.edit().remove("numeroDecimal").apply()
+
+        binding.editNumber.text.clear()
+        binding.textViewNumber.setText("")
+
+        binding.editText.text.clear()
+        binding.textViewText.setText("")
+
+        binding.editNumberDecimal.text.clear()
+        binding.textViewNumberDecimal.setText("")
     }
 
 }

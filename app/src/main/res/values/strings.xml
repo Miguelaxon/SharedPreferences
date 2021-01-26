@@ -14,7 +14,7 @@
     <string name="ingresa_un_texto">Ingresa un Texto</string>
     <string name="texto_almacenado">Texto Almacenado: %1$s</string>
     <string name="numero_decimal">Ingresa un Número Decimal</string>
-    <string name="valorDecimal">Valor Decimal Almacenado: %1$d</string>
+    <string name="valorDecimal">Valor Decimal Almacenado: %1$s</string>
     <string name="btn_borrar">BORRAR</string>
     <string name="btn_guardar">GUARDAR</string>
 </resources>
